@@ -1,0 +1,29 @@
+button {
+	display: none;
+}
+
+p {
+	display: none;
+	border: 1px solid black;
+}
+
+#buttonStart {
+	display: inline;
+}
+
+#buttonOptions {
+	display: inline;
+}
+
+#increaseColors {
+	display: inline;
+}
+
+#decreaseColors {
+	display: inline;
+}
+
+#amountColors {
+	display: inline;
+}
+
