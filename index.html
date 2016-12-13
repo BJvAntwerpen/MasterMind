@@ -8,10 +8,11 @@
 <body>
 
 <button id="buttonStart" type="button" onclick="startGame();">Start</button> <!-- start the game with certain options -->
-<button id="buttonOptions" type="button">Options</button> <!-- Select certain options -->
-<button type="button">false</button> <!-- allow duplicate colors (true/false) -->
-<button type="button">Back</button> <!-- back to start screen -->
-<button type="button">Play</button> <!-- play the chosen colors -->
+<button id="buttonOptions" type="button" onclick="options();">Options</button> <!-- Select certain options -->
+<button id="dupeColors" type="button" onclick="changeDupes();">false</button> <!-- allow duplicate colors (true/false) -->
+<button id="buttonBack" type="button" onclick="Back();">Back</button> <!-- back to start screen -->
+<button id="buttonExit" type="button" onclick="exitGame();">exit</button>
+<button id="buttonPlay" type="button" onclick="playColors();">Play</button> <!-- play the chosen colors -->
 <button id="decreaseColors" type="button" onclick="decreaseColors();">&#8810;</button> <!-- increase/decrease the amount of colors in the game -->
 <p id="amountColors">6</p>
 <button id="increaseColors" type="button" onclick="increaseColors();">&#8811;</button>
