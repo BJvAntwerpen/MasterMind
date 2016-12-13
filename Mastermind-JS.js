@@ -11,14 +11,14 @@ var colors = [
 	"pink"
 ];
 var chosenColors = [];
-var code = []
+var code = [];
 var colorAmount = 6;
 var dupes = false;
 
 // all functions for options
 function options() {
 	console.log('Options');
-	document.body.style.backgroundColor = colors[Math.floor(Math.random() * 10)]
+	document.body.style.backgroundColor = colors[Math.floor(Math.random() * 10)];
 	document.getElementById('buttonStart').style.display = "none";
 	document.getElementById('buttonOptions').style.display = "none";
 	document.getElementById('decreaseColors').style.display = "inline";
