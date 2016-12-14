@@ -11,6 +11,11 @@ p {
 	border: 1px solid black;
 }
 
+canvas {
+	border: 1px solid black;
+	display: none;
+}
+
 #buttonStart {
 	display: inline;
 }

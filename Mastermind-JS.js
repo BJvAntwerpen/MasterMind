@@ -79,23 +79,43 @@ function startGame() {
 	document.getElementById('buttonStart').style.display = "none";
 	document.getElementById('buttonOptions').style.display = "none";
 	document.getElementById('buttonExit').style.display = "inline";
+	document.getElementById('Circles').style.display = "inline";
+	document.getElementById('test').style.display = "inline"
 }
 
 function test() {
+	code = [];
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
 	var i;
+	var l;
 	for (i=0; i < 4; i++) {
 		var c = Math.floor(Math.random() * colorAmount);
-		console.log(c);
-		code.push(chosenColors[c]);
+		if (dupes == true) {
+			console.log(c);
+			code.push(chosenColors[c]);
+		} else {
+			for (l=0; l<4; l++) {
+				if (code[l])
+			}
+		}
 	}
 	console.log(code);
+	for (i=0; i < 4; i++) {
+		ctx.beginPath();
+		ctx.arc(i*100 + 50,50,50,0,2*Math.PI);
+		ctx.fillStyle=code[i];
+		ctx.fill();
+	}
 }
 
 function exitGame() {
+	//ctx.clearRect(0,0,c.width,c.height);
 	document.body.style.backgroundColor = "aqua";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('buttonExit').style.display = "none";
+	document.getElementById('Circles').style.display = "none";
 	code = [];
 	chosenColors = [];
 }
