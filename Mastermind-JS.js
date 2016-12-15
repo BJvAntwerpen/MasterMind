@@ -109,7 +109,7 @@ function test() {
 		} else {
 			for (l=0; l<4; l++) {
 				if (code[l] == chosenColors[c]) {
-					console.log("dupe");
+					console.log("dupe"); // new number
 					break;
 				} else {
 					console.log(c);
