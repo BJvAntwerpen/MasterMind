@@ -34,6 +34,12 @@ function increaseColors() {
 	}
 	document.getElementById('amountColors').innerHTML = colorAmount;
 	console.log('color amount: ' + colorAmount)
+	document.getElementById('decreaseColors').style.backgroundColor = "green";
+	if (colorAmount == 10) {
+		document.getElementById('increaseColors').style.backgroundColor = "red";
+	} else {
+		document.getElementById('increaseColors').style.backgroundColor = "green";
+	}
 }
 
 function decreaseColors() {
@@ -42,6 +48,12 @@ function decreaseColors() {
 	}
 	document.getElementById('amountColors').innerHTML = colorAmount;
 	console.log('color amount: ' + colorAmount)
+	document.getElementById('increaseColors').style.backgroundColor = "green";
+	if (colorAmount == 6) {
+		document.getElementById('decreaseColors').style.backgroundColor = "red";
+	} else {
+		document.getElementById('decreaseColors').style.backgroundColor = "green";
+	}
 }
 
 function changeDupes() {
@@ -84,19 +96,26 @@ function startGame() {
 }
 
 function test() {
-	code = [];
 	var c = document.getElementById('Circles');
 	var ctx = c.getContext("2d");
 	var i;
 	var l;
-	for (i=0; i < 4; i++) {
+	for (i=0; i == (code.length == 4);) {
 		var c = Math.floor(Math.random() * colorAmount);
+		console.log(chosenColors[c]);
 		if (dupes == true) {
 			console.log(c);
 			code.push(chosenColors[c]);
 		} else {
 			for (l=0; l<4; l++) {
-				if (code[l])
+				if (code[l] == chosenColors[c]) {
+					console.log("dupe");
+					break;
+				} else {
+					console.log(c);
+					code.push(chosenColors[c]);
+					break;
+				}
 			}
 		}
 	}
