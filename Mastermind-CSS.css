@@ -14,6 +14,9 @@ p {
 canvas {
 	border: 1px solid black;
 	display: none;
+	position: absolute;
+	top: 10px;
+	left: 527.1px;
 }
 
 #buttonStart {

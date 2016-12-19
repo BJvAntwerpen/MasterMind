@@ -92,28 +92,35 @@ function startGame() {
 	document.getElementById('buttonOptions').style.display = "none";
 	document.getElementById('buttonExit').style.display = "inline";
 	document.getElementById('Circles').style.display = "inline";
-	document.getElementById('test').style.display = "inline"
+	document.getElementById('testCodeGen').style.display = "inline";
+	document.getElementById('testHints').style.display = "inline";
+	document.getElementById('testSpacing').style.display = "inline";
+
 }
 
-function test() {
+function testCode() {
 	var c = document.getElementById('Circles');
 	var ctx = c.getContext("2d");
 	var i;
 	var l;
-	for (i=0; i == (code.length == 4);) {
-		var c = Math.floor(Math.random() * colorAmount);
-		console.log(chosenColors[c]);
-		if (dupes == true) {
+	var c;
+	if (dupes == true) {
+		for (i=0; i<4; i++) {
+			c = Math.floor(Math.random() * colorAmount);
 			console.log(c);
-			code.push(chosenColors[c]);
-		} else {
-			for (l=0; l<4; l++) {
-				if (code[l] == chosenColors[c]) {
-					console.log("dupe"); // new number
-					break;
-				} else {
+			code.push(c);
+		}
+	} else {
+		for (i=0; i == (code.length == 4);) {
+			c = Math.floor(Math.random() * colorAmount);
+			console.log("number =" + c)
+			for (l=0; l<code.length + 1; l++) {
+				if (code[l] != c) {
 					console.log(c);
-					code.push(chosenColors[c]);
+					code.push(c);
+					break;
+				} else if (code[l] == c) {
+					console.log("dupe: " + c)
 					break;
 				}
 			}
@@ -121,20 +128,41 @@ function test() {
 	}
 	console.log(code);
 	for (i=0; i < 4; i++) {
+		code.splice(i, 1, chosenColors[code[i]]);
 		ctx.beginPath();
-		ctx.arc(i*100 + 50,50,50,0,2*Math.PI);
+		ctx.arc(i*100 + 90,50,50,0,2*Math.PI);
 		ctx.fillStyle=code[i];
 		ctx.fill();
 	}
 }
 
+function testHints() {
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
+	var h;
+	var v;
+	for (h=0; h<2; h++) {
+		for (v=0; v<24; v++) {
+			ctx.beginPath();
+			ctx.arc(h*20 + 10, v*20 + 100, 10, 0, 2*Math.PI);
+			ctx.fillStyle="red";
+			ctx.fill();
+		}
+	}
+}
+
 function exitGame() {
-	//ctx.clearRect(0,0,c.width,c.height);
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
+	ctx.clearRect(0,0,c.width,c.height);
 	document.body.style.backgroundColor = "aqua";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('buttonExit').style.display = "none";
 	document.getElementById('Circles').style.display = "none";
+	document.getElementById('testCodeGen').style.display = "none";
+	document.getElementById('testHints').style.display = "none";
+	document.getElementById('testSpacing').style.display = "none";
 	code = [];
 	chosenColors = [];
 }
