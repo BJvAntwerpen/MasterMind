@@ -12,6 +12,7 @@ var colors = [
 ];
 var chosenColors = [];
 var code = [];
+var playCode = [];
 var colorAmount = 6;
 var dupes = false;
 
@@ -95,12 +96,13 @@ function startGame() {
 	document.getElementById('testCodeGen').style.display = "inline";
 	document.getElementById('testHints').style.display = "inline";
 	document.getElementById('testSpacing').style.display = "inline";
+	document.getElementById('testEntry').style.display = "inline";
 
 }
 
 function testCode() {
-	var c = document.getElementById('Circles');
-	var ctx = c.getContext("2d");
+	var cr = document.getElementById('Circles');
+	var ctx = cr.getContext("2d");
 	var i;
 	var l;
 	var c;
@@ -114,15 +116,11 @@ function testCode() {
 		for (i=0; i == (code.length == 4);) {
 			c = Math.floor(Math.random() * colorAmount);
 			console.log("number =" + c)
-			for (l=0; l<code.length + 1; l++) {
-				if (code[l] != c) {
-					console.log(c);
-					code.push(c);
-					break;
-				} else if (code[l] == c) {
-					console.log("dupe: " + c)
-					break;
-				}
+			if (code[0] != c && code[1] != c && code[2] != c && code[3] != c) {
+				console.log(c);
+				code.push(c);
+			} else {
+				console.log("dupe: " + c)
 			}
 		}
 	}
@@ -141,11 +139,48 @@ function testHints() {
 	var ctx = c.getContext("2d");
 	var h;
 	var v;
-	for (h=0; h<2; h++) {
-		for (v=0; v<24; v++) {
+	var r;
+	for (r=0; r<2; r++) {
+		for (h=0; h<2; h++) {
+			for (v=0; v<24; v++) {
+				ctx.beginPath();
+				ctx.arc(r*440 + h*20 + 10, v*20 + 110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill();
+			}
+		}
+	}
+}
+
+function testSpacing() {
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
+	var h;
+	var v;
+	for (v=0;v<12;v++) {
+		ctx.beginPath();
+		ctx.moveTo(0, v*40 + 100);
+		ctx.lineTo(480, v*40 + 100);
+		ctx.stroke();
+	}
+	for (h=0;h<5;h++) {
+		ctx.beginPath();
+		ctx.moveTo(h*100+40, 0);
+		ctx.lineTo(h*100+40, 580);
+		ctx.stroke();
+	}
+}
+
+function testEntry() {
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
+	var h;
+	var v;
+	for (h=0; h<4; h++) {
+		for (v=0; v<12; v++) {
 			ctx.beginPath();
-			ctx.arc(h*20 + 10, v*20 + 100, 10, 0, 2*Math.PI);
-			ctx.fillStyle="red";
+			ctx.arc(h*100 + 90, v*40 +120, 20, 0, 2*Math.PI);
+			ctx.fillStyle="green";
 			ctx.fill();
 		}
 	}
@@ -163,6 +198,25 @@ function exitGame() {
 	document.getElementById('testCodeGen').style.display = "none";
 	document.getElementById('testHints').style.display = "none";
 	document.getElementById('testSpacing').style.display = "none";
+	document.getElementById('testEntry').style.display = "none";
 	code = [];
 	chosenColors = [];
 }
+
+function moveLR(event) {
+	var c = document.getElementById('Circles');
+	var ctx = c.getContext("2d");
+	var select = 0;
+	var arrowKey = event.key;
+	if (arrowKey == 'ArrowLeft') {
+		console.log('pressed left');
+	} else if (arrowKey == 'ArrowRight') {
+		console.log('pressed right');
+	}
+}
+
+/*
+notes
+http://www.w3schools.com/jsref/event_key_key.asp
+http://www.w3schools.com/TAgs/ref_canvas.asp
+*/

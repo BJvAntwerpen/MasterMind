@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="Mastermind-CSS.css">
 	<script src="Mastermind-JS.js" type="text/javascript"></script>
 </head>
-<body>
+<body onkeydown="moveLR(event);">
 
 <button id="buttonStart" type="button" onclick="startGame();">Start</button>
 <button id="buttonOptions" type="button" onclick="options();">Options</button>
@@ -20,6 +20,7 @@
 <button id="testCodeGen" onclick="testCode();">testCode</button>
 <button id="testHints" onclick="testHints();">testHint</button>
 <button id="testSpacing" onclick="testSpacing();">testSpacing</button>
+<button id="testEntry" onclick="testEntry();">testEntry</button>
 
 
 </body>
