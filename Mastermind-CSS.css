@@ -1,5 +1,5 @@
 body {
-	background-color: aqua;
+	background-color: maroon;
 }
 
 button {
@@ -33,10 +33,91 @@ canvas {
 }
 
 #decreaseColors {
-	background-color: red;
+	background-color: green;
 	border: 1px solid black;
 }
 
-#amountColors {
-	
+#colorContainer {
+	position: absolute;
+	top: 600px;
+	left: 527.1px;
+	width: 480px;
+	height: 150px;
+}
+
+#color1, #color2, #color3, #color4, #color5, #color6, #color7, #color8, #color9, #color10 {
+	width: 65px;
+	height: 65px;
+	border: none;
+	border-radius: 50%;
+}
+
+#color1 {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	background-color: green;
+}
+
+#color2 {
+	position: absolute;
+	top: 75px;
+	left: 5px;
+	background-color: blue;
+}
+
+#color3 {
+	position: absolute;
+	top: 5px;
+	left: 75px;
+	background-color: red;
+}
+
+#color4 {
+	position: absolute;
+	top: 75px;
+	left: 75px;
+	background-color: yellow;
+}
+
+#color5 {
+	position: absolute;
+	top: 5px;
+	left: 145px;
+	background-color: cyan;
+}
+
+#color6 {
+	position: absolute;
+	top: 75px;
+	left: 145px;
+	background-color: lime;
+}
+
+#color7 {
+	position: absolute;
+	top: 5px;
+	left: 215px;
+	background-color: purple;
+}
+
+#color8 {
+	position: absolute;
+	top: 75px;
+	left: 215px;
+	background-color: magenta;
+}
+
+#color9 {
+	position: absolute;
+	top: 5px;
+	left: 285px;
+	background-color: orange;
+}
+
+#color10 {
+	position: absolute;
+	top: 75px;
+	left: 285px;
+	background-color: pink;
 }

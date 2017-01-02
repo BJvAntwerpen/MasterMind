@@ -10,11 +10,11 @@ var colors = [
 	"orange",
 	"pink"
 ];
-var chosenColors = [];
 var code = [];
 var playCode = [];
-var colorAmount = 6;
+var colorAmount = 8;
 var dupes = false;
+var select = 0;
 
 // all functions for options
 function options() {
@@ -71,7 +71,7 @@ function changeDupes() {
 
 function Back() {
 	console.log('back');
-	document.body.style.backgroundColor = "aqua";
+	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('decreaseColors').style.display = "none";
@@ -83,25 +83,55 @@ function Back() {
 
 // all functions for the game
 function startGame() {
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
 	var i;
-	for (i=0; i < colorAmount; i++) {
-		chosenColors.push(colors[i]);
+	var button = document.getElementsByTagName('button');
+	for (i=11; i < (colorAmount + 11); i++) {
+		button[i].style.display = "inline";
 	}
-	console.log(chosenColors);
 	document.body.style.backgroundColor = "navy";
 	document.getElementById('buttonStart').style.display = "none";
 	document.getElementById('buttonOptions').style.display = "none";
 	document.getElementById('buttonExit').style.display = "inline";
-	document.getElementById('Circles').style.display = "inline";
+	document.getElementById('Canvas').style.display = "inline";
+	document.getElementById('buttonPlay').style.display = "inline";
 	document.getElementById('testCodeGen').style.display = "inline";
 	document.getElementById('testHints').style.display = "inline";
-	document.getElementById('testSpacing').style.display = "inline";
 	document.getElementById('testEntry').style.display = "inline";
+	ctx.beginPath();
+	ctx.moveTo(42,561);
+	ctx.lineTo(68,561);
+	ctx.lineTo(56,549);
+	ctx.moveTo(68,561);
+	ctx.lineTo(56,573);
+	ctx.strokeStyle='cyan';
+	ctx.stroke();
+	select = 0;
+}
 
+function spacing() {
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
+	var h;
+	var v;
+	ctx.strokeStyle='black';
+	for (v=0;v<12;v++) {
+		ctx.beginPath();
+		ctx.moveTo(0, v*40 + 100);
+		ctx.lineTo(480, v*40 + 100);
+		ctx.stroke();
+	}
+	for (h=0;h<5;h++) {
+		ctx.beginPath();
+		ctx.moveTo(h*100+40, 0);
+		ctx.lineTo(h*100+40, 580);
+		ctx.stroke();
+	}
 }
 
 function testCode() {
-	var cr = document.getElementById('Circles');
+	var cr = document.getElementById('Canvas');
 	var ctx = cr.getContext("2d");
 	var i;
 	var l;
@@ -126,7 +156,7 @@ function testCode() {
 	}
 	console.log(code);
 	for (i=0; i < 4; i++) {
-		code.splice(i, 1, chosenColors[code[i]]);
+		code.splice(i, 1, colors[code[i]]);
 		ctx.beginPath();
 		ctx.arc(i*100 + 90,50,50,0,2*Math.PI);
 		ctx.fillStyle=code[i];
@@ -135,7 +165,7 @@ function testCode() {
 }
 
 function testHints() {
-	var c = document.getElementById('Circles');
+	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	var h;
 	var v;
@@ -152,27 +182,8 @@ function testHints() {
 	}
 }
 
-function testSpacing() {
-	var c = document.getElementById('Circles');
-	var ctx = c.getContext("2d");
-	var h;
-	var v;
-	for (v=0;v<12;v++) {
-		ctx.beginPath();
-		ctx.moveTo(0, v*40 + 100);
-		ctx.lineTo(480, v*40 + 100);
-		ctx.stroke();
-	}
-	for (h=0;h<5;h++) {
-		ctx.beginPath();
-		ctx.moveTo(h*100+40, 0);
-		ctx.lineTo(h*100+40, 580);
-		ctx.stroke();
-	}
-}
-
 function testEntry() {
-	var c = document.getElementById('Circles');
+	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	var h;
 	var v;
@@ -187,31 +198,75 @@ function testEntry() {
 }
 
 function exitGame() {
-	var c = document.getElementById('Circles');
+	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
-	document.body.style.backgroundColor = "aqua";
+	var button = document.getElementsByTagName('button');
+	for (i=11; i < (colorAmount + 11); i++) {
+		button[i].style.display = "none";
+	}
+	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('buttonExit').style.display = "none";
-	document.getElementById('Circles').style.display = "none";
+	document.getElementById('Canvas').style.display = "none";
+	document.getElementById('buttonPlay').style.display = "none";
 	document.getElementById('testCodeGen').style.display = "none";
 	document.getElementById('testHints').style.display = "none";
-	document.getElementById('testSpacing').style.display = "none";
 	document.getElementById('testEntry').style.display = "none";
+	document.getElementById('color1').style.display = "none";
 	code = [];
-	chosenColors = [];
+	playCode = [];
 }
 
 function moveLR(event) {
-	var c = document.getElementById('Circles');
+	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
-	var select = 0;
 	var arrowKey = event.key;
+	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
+		ctx.clearRect(42+select*100,548,27,26);
+	}
 	if (arrowKey == 'ArrowLeft') {
 		console.log('pressed left');
+		if (select > 0) {
+			select -= 1;
+		}
 	} else if (arrowKey == 'ArrowRight') {
 		console.log('pressed right');
+		if (select < 3) {
+			select += 1;
+		}
+	}
+	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
+	ctx.beginPath();
+	ctx.moveTo(42+select*100,561);
+	ctx.lineTo(68+select*100,561);
+	ctx.lineTo(56+select*100,549);
+	ctx.moveTo(68+select*100,561);
+	ctx.lineTo(56+select*100,573);
+	ctx.strokeStyle='cyan';
+	ctx.stroke();
+}
+}
+
+function addColor(color) {
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
+	var i = 0;
+	if (playCode.length != 4) {
+		playCode.push(color);
+		console.log(color);
+	} else if (playCode.length == 4) {
+		console.log('filled');
+	}
+}
+
+function playColors() {
+	if (playCode.length != 4) {
+		console.log("plz select 4 colors!");
+	} else {
+		console.log(playCode);
+		playCode = [];
 	}
 }
 
