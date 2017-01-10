@@ -99,6 +99,7 @@ function startGame() {
 	document.getElementById('buttonPlay').style.display = "inline";
 	document.getElementById('viewCode').style.display = "inline";
 	document.getElementById('testHints').style.display = "inline";
+	document.getElementById('inGameInfo').style.display = "inline";
 	select = 0;
 }
 
@@ -128,16 +129,9 @@ function HUD() {
 	ctx.lineTo(56,573);
 	ctx.strokeStyle='cyan';
 	ctx.stroke();
-	for (r=0; r<2; r++) {
-		for (h=0; h<2; h++) {
-			for (v=0; v<24; v++) {
-				ctx.beginPath();
-				ctx.arc(r*440 + h*20 + 10, v*20 + 110, 10, 0, 2*Math.PI);
-				ctx.fillStyle="black";
-				ctx.fill();
-			}
-		}
-	}
+	ctx.fillStyle='black';
+	ctx.fillRect(0,0,40,580);
+	ctx.fillRect(440,0,40,580);
 }
 
 function genCode() {
@@ -218,6 +212,8 @@ function exitGame() {
 	document.getElementById('viewCode').style.display = "none";
 	document.getElementById('testHints').style.display = "none";
 	document.getElementById('color1').style.display = "none";
+	document.getElementById('inGameInfo').style.display = "none";
+	document.getElementById('inGameInfo').innerHTML = "";
 	code = [];
 	playCode = [];
 }
@@ -227,7 +223,7 @@ function moveLR(event) {
 	var ctx = c.getContext("2d");
 	var arrowKey = event.key;
 	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
-		ctx.clearRect(42+select*100,548,27,26);
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
 	}
 	if (arrowKey == 'ArrowLeft') {
 		console.log('pressed left');
@@ -242,11 +238,11 @@ function moveLR(event) {
 	}
 	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
 	ctx.beginPath();
-	ctx.moveTo(42+select*100,561);
-	ctx.lineTo(68+select*100,561);
-	ctx.lineTo(56+select*100,549);
-	ctx.moveTo(68+select*100,561);
-	ctx.lineTo(56+select*100,573);
+	ctx.moveTo(42+select*100,triesLeft*40+121);
+	ctx.lineTo(68+select*100,triesLeft*40+121);
+	ctx.lineTo(56+select*100,triesLeft*40+109);
+	ctx.moveTo(68+select*100,triesLeft*40+121);
+	ctx.lineTo(56+select*100,triesLeft*40+133);
 	ctx.strokeStyle='cyan';
 	ctx.stroke();
 }
@@ -264,11 +260,29 @@ function addColor(color) {
 }
 
 function playColors() {
-	if (playCode.length != 4) {
-		console.log("plz select 4 colors!");
-	} else {
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
+	if (playCode.length == 4 && playCode[0] != undefined && playCode[1] != undefined && playCode[2] != undefined && playCode[3] != undefined) {
 		console.log(playCode);
 		playCode = [];
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
+		if (triesLeft != 0) {
+			triesLeft -=1;
+			ctx.beginPath();
+			ctx.moveTo(42+select*100,triesLeft*40+121);
+			ctx.lineTo(68+select*100,triesLeft*40+121);
+			ctx.lineTo(56+select*100,triesLeft*40+109);
+			ctx.moveTo(68+select*100,triesLeft*40+121);
+			ctx.lineTo(56+select*100,triesLeft*40+133);
+			ctx.strokeStyle='cyan';
+			ctx.stroke();
+		} else {
+			document.getElementById('inGameInfo').innerHTML = "game over!";
+			viewCode();
+			setTimeout(exitGame,3000);
+		}
+	} else {
+		console.log("plz select 4 colors!");
 	}
 }
 
@@ -278,17 +292,9 @@ http://www.w3schools.com/jsref/event_key_key.asp
 http://www.w3schools.com/TAgs/ref_canvas.asp
 
 code in progress
-Func:playColors {
-	if (playCode.length != 4) {
-		console.log("plz select 4 colors!");
-	} else {
-		console.log(playCode);
-		playCode = [];
-	}
-}
-
 new line/-1 triesLeft
-draw arrow
+draw arrow on new line
+remove arrow from old line
 hints(left white,right red)
 
 */
