@@ -27,6 +27,26 @@ canvas {
 	display: inline;
 }
 
+#buttonPlay {
+	position: absolute;
+	top: 5px;
+	left: 285px;
+	width: 190px;
+	height: 65px;
+	border: none;
+	background-color: rgba(255,255,255,0.1);
+}
+
+#buttonExit {
+	position: absolute;
+	top: 75px;
+	left: 285px;
+	width: 190px;
+	height: 65px;
+	border: none;
+	background-color: rgba(255,255,255,0.1);
+}
+
 #increaseColors {
 	background-color: green;
 	border: 1px solid black;
@@ -38,6 +58,7 @@ canvas {
 }
 
 #colorContainer {
+	/*border: 1px solid black;*/
 	position: absolute;
 	top: 600px;
 	left: 527.1px;

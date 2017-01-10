@@ -15,6 +15,7 @@ var playCode = [];
 var colorAmount = 8;
 var dupes = false;
 var select = 0;
+var triesLeft = 11;
 
 // all functions for options
 function options() {
@@ -87,7 +88,7 @@ function startGame() {
 	var ctx = c.getContext("2d");
 	var i;
 	var button = document.getElementsByTagName('button');
-	for (i=11; i < (colorAmount + 11); i++) {
+	for (i=9; i < (colorAmount + 9); i++) {
 		button[i].style.display = "inline";
 	}
 	document.body.style.backgroundColor = "navy";
@@ -202,7 +203,7 @@ function exitGame() {
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
 	var button = document.getElementsByTagName('button');
-	for (i=11; i < (colorAmount + 11); i++) {
+	for (i=9; i < (colorAmount + 9); i++) {
 		button[i].style.display = "none";
 	}
 	document.body.style.backgroundColor = "maroon";
@@ -252,13 +253,12 @@ function moveLR(event) {
 function addColor(color) {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
-	var i = 0;
-	if (playCode.length != 4) {
-		playCode.push(color);
-		console.log(color);
-	} else if (playCode.length == 4) {
-		console.log('filled');
-	}
+	playCode[select] = color;
+	console.log(color);
+	ctx.beginPath();
+	ctx.arc(select*100 + 90, triesLeft*40 +120, 20, 0, 2*Math.PI);
+	ctx.fillStyle=color;
+	ctx.fill();
 }
 
 function playColors() {
@@ -274,4 +274,14 @@ function playColors() {
 notes
 http://www.w3schools.com/jsref/event_key_key.asp
 http://www.w3schools.com/TAgs/ref_canvas.asp
+
+code in progress
+Func:playColors {
+	if (playCode.length != 4) {
+		console.log("plz select 4 colors!");
+	} else {
+		console.log(playCode);
+		playCode = [];
+	}
+}
 */
