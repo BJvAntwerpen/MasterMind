@@ -30,8 +30,8 @@ canvas {
 #buttonPlay {
 	position: absolute;
 	top: 5px;
-	left: 285px;
-	width: 190px;
+	left: 355px;
+	width: 120px;
 	height: 65px;
 	border: none;
 	background-color: rgba(255,255,255,0.1);
@@ -40,8 +40,8 @@ canvas {
 #buttonExit {
 	position: absolute;
 	top: 75px;
-	left: 285px;
-	width: 190px;
+	left: 355px;
+	width: 120px;
 	height: 65px;
 	border: none;
 	background-color: rgba(255,255,255,0.1);

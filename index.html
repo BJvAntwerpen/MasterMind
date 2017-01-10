@@ -7,7 +7,7 @@
 </head>
 <body onkeydown="moveLR(event);">
 
-<button id="buttonStart" type="button" onclick="startGame(); spacing();">Start</button>
+<button id="buttonStart" type="button" onclick="startGame(); HUD(); genCode();">Start</button>
 <button id="buttonOptions" type="button" onclick="options();">Options</button>
 <button id="dupeColors" type="button" onclick="changeDupes();">false</button> <!-- allow duplicate colors (true/false) -->
 <button id="buttonBack" type="button" onclick="Back();">Back</button> <!-- back to start screen -->
@@ -15,7 +15,7 @@
 <p id="amountColors">8</p>
 <button id="increaseColors" type="button" onclick="increaseColors();">&#8811;</button>
 <canvas id="Canvas" width="480px" height="580px"></canvas>
-<button id="testCodeGen" onclick="testCode();">testCode</button>
+<button id="viewCode" onclick="viewCode();">viewCode</button>
 <button id="testHints" onclick="testHints();">testHint</button>
 <div id="colorContainer">
 	<button id="color1" onclick="addColor('green');"></button>

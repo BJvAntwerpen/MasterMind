@@ -97,20 +97,12 @@ function startGame() {
 	document.getElementById('buttonExit').style.display = "inline";
 	document.getElementById('Canvas').style.display = "inline";
 	document.getElementById('buttonPlay').style.display = "inline";
-	document.getElementById('testCodeGen').style.display = "inline";
+	document.getElementById('viewCode').style.display = "inline";
 	document.getElementById('testHints').style.display = "inline";
-	ctx.beginPath();
-	ctx.moveTo(42,561);
-	ctx.lineTo(68,561);
-	ctx.lineTo(56,549);
-	ctx.moveTo(68,561);
-	ctx.lineTo(56,573);
-	ctx.strokeStyle='cyan';
-	ctx.stroke();
 	select = 0;
 }
 
-function spacing() {
+function HUD() {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	var h;
@@ -128,13 +120,28 @@ function spacing() {
 		ctx.lineTo(h*100+40, 580);
 		ctx.stroke();
 	}
+	ctx.beginPath();
+	ctx.moveTo(42,561);
+	ctx.lineTo(68,561);
+	ctx.lineTo(56,549);
+	ctx.moveTo(68,561);
+	ctx.lineTo(56,573);
+	ctx.strokeStyle='cyan';
+	ctx.stroke();
+	for (r=0; r<2; r++) {
+		for (h=0; h<2; h++) {
+			for (v=0; v<24; v++) {
+				ctx.beginPath();
+				ctx.arc(r*440 + h*20 + 10, v*20 + 110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="black";
+				ctx.fill();
+			}
+		}
+	}
 }
 
-function testCode() {
-	var cr = document.getElementById('Canvas');
-	var ctx = cr.getContext("2d");
+function genCode() {
 	var i;
-	var l;
 	var c;
 	if (dupes == true) {
 		for (i=0; i<4; i++) {
@@ -154,9 +161,17 @@ function testCode() {
 			}
 		}
 	}
-	console.log(code);
 	for (i=0; i < 4; i++) {
 		code.splice(i, 1, colors[code[i]]);
+	}
+	console.log(code);
+}
+
+function viewCode() {
+	var cr = document.getElementById('Canvas');
+	var ctx = cr.getContext("2d");
+	var i;
+	for (i=0; i < 4; i++) {
 		ctx.beginPath();
 		ctx.arc(i*100 + 90,50,50,0,2*Math.PI);
 		ctx.fillStyle=code[i];
@@ -175,7 +190,11 @@ function testHints() {
 			for (v=0; v<24; v++) {
 				ctx.beginPath();
 				ctx.arc(r*440 + h*20 + 10, v*20 + 110, 10, 0, 2*Math.PI);
-				ctx.fillStyle="red";
+				if (r == 0) {
+					ctx.fillStyle="white";
+				} else {
+					ctx.fillStyle="red";
+				}
 				ctx.fill();
 			}
 		}
@@ -196,7 +215,7 @@ function exitGame() {
 	document.getElementById('buttonExit').style.display = "none";
 	document.getElementById('Canvas').style.display = "none";
 	document.getElementById('buttonPlay').style.display = "none";
-	document.getElementById('testCodeGen').style.display = "none";
+	document.getElementById('viewCode').style.display = "none";
 	document.getElementById('testHints').style.display = "none";
 	document.getElementById('color1').style.display = "none";
 	code = [];
@@ -270,7 +289,6 @@ Func:playColors {
 
 new line/-1 triesLeft
 draw arrow
-hints
-left white,right red
+hints(left white,right red)
 
 */
