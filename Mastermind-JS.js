@@ -88,7 +88,7 @@ function startGame() {
 	var ctx = c.getContext("2d");
 	var i;
 	var button = document.getElementsByTagName('button');
-	for (i=9; i < (colorAmount + 9); i++) {
+	for (i=8; i < (colorAmount + 8); i++) {
 		button[i].style.display = "inline";
 	}
 	document.body.style.backgroundColor = "navy";
@@ -99,7 +99,6 @@ function startGame() {
 	document.getElementById('buttonPlay').style.display = "inline";
 	document.getElementById('testCodeGen').style.display = "inline";
 	document.getElementById('testHints').style.display = "inline";
-	document.getElementById('testEntry').style.display = "inline";
 	ctx.beginPath();
 	ctx.moveTo(42,561);
 	ctx.lineTo(68,561);
@@ -183,27 +182,12 @@ function testHints() {
 	}
 }
 
-function testEntry() {
-	var c = document.getElementById('Canvas');
-	var ctx = c.getContext("2d");
-	var h;
-	var v;
-	for (h=0; h<4; h++) {
-		for (v=0; v<12; v++) {
-			ctx.beginPath();
-			ctx.arc(h*100 + 90, v*40 +120, 20, 0, 2*Math.PI);
-			ctx.fillStyle="green";
-			ctx.fill();
-		}
-	}
-}
-
 function exitGame() {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
 	var button = document.getElementsByTagName('button');
-	for (i=9; i < (colorAmount + 9); i++) {
+	for (i=8; i < (colorAmount + 8); i++) {
 		button[i].style.display = "none";
 	}
 	document.body.style.backgroundColor = "maroon";
@@ -214,7 +198,6 @@ function exitGame() {
 	document.getElementById('buttonPlay').style.display = "none";
 	document.getElementById('testCodeGen').style.display = "none";
 	document.getElementById('testHints').style.display = "none";
-	document.getElementById('testEntry').style.display = "none";
 	document.getElementById('color1').style.display = "none";
 	code = [];
 	playCode = [];
@@ -284,4 +267,10 @@ Func:playColors {
 		playCode = [];
 	}
 }
+
+new line/-1 triesLeft
+draw arrow
+hints
+left white,right red
+
 */
