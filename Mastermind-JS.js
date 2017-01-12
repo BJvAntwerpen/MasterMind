@@ -60,18 +60,6 @@ function decreaseColors() {
 	}
 }
 
-function changeDupes() {
-	if (dupes == false) {
-		dupes = true;
-		document.getElementById('dupeColors').innerHTML = dupes;
-		console.log('duplicate colors: ' + dupes);
-	} else {
-		dupes = false;
-		document.getElementById('dupeColors').innerHTML = dupes;
-		console.log('duplicate colors: ' + dupes);
-	}
-}
-
 function Back() {
 	console.log('back');
 	document.body.style.backgroundColor = "maroon";
@@ -92,7 +80,7 @@ function startGame() {
 	var ctx = c.getContext("2d");
 	var i;
 	var button = document.getElementsByTagName('button');
-	for (i=6; i < (colorAmount + 6); i++) {
+	for (i=5; i < (colorAmount + 5); i++) {
 		button[i].style.display = "inline";
 	}
 	document.body.style.backgroundColor = "navy";
@@ -141,22 +129,14 @@ function HUD() {
 function genCode() {
 	var i;
 	var c;
-	if (dupes == true) {
-		for (i=0; i<4; i++) {
-			c = Math.floor(Math.random() * colorAmount);
+	for (i=0; i == (code.length == 4);) {
+		c = Math.floor(Math.random() * colorAmount);
+		console.log("number =" + c)
+		if (code[0] != c && code[1] != c && code[2] != c && code[3] != c) {
 			console.log(c);
 			code.push(c);
-		}
-	} else {
-		for (i=0; i == (code.length == 4);) {
-			c = Math.floor(Math.random() * colorAmount);
-			console.log("number =" + c)
-			if (code[0] != c && code[1] != c && code[2] != c && code[3] != c) {
-				console.log(c);
-				code.push(c);
-			} else {
-				console.log("dupe: " + c)
-			}
+		} else {
+			console.log("dupe: " + c)
 		}
 	}
 	for (i=0; i < 4; i++) {
@@ -182,7 +162,7 @@ function exitGame() {
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
 	var button = document.getElementsByTagName('button');
-	for (i=6; i < (colorAmount + 6); i++) {
+	for (i=5; i < (colorAmount + 5); i++) {
 		button[i].style.display = "none";
 	}
 	document.body.style.backgroundColor = "maroon";
@@ -384,13 +364,3 @@ function checkHints() {
 		playColors();
 	}
 }
-
-/*
-notes
-http://www.w3schools.com/jsref/event_key_key.asp
-http://www.w3schools.com/TAgs/ref_canvas.asp
-
-code in progress
-hints(left white,right red)
-
-*/
