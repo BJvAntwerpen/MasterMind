@@ -23,6 +23,8 @@ function options() {
 	document.body.style.backgroundColor = colors[Math.floor(Math.random() * 10)];
 	document.getElementById('buttonStart').style.display = "none";
 	document.getElementById('buttonOptions').style.display = "none";
+	document.getElementById('explanation').style.display = "none";
+	document.getElementById('title').style.display = "none";
 	document.getElementById('decreaseColors').style.display = "inline";
 	document.getElementById('increaseColors').style.display = "inline";
 	document.getElementById('amountColors').style.display = "inline";
@@ -74,6 +76,8 @@ function Back() {
 	console.log('back');
 	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
+	document.getElementById('explanation').style.display = "inline";
+	document.getElementById('title').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('decreaseColors').style.display = "none";
 	document.getElementById('increaseColors').style.display = "none";
@@ -88,17 +92,17 @@ function startGame() {
 	var ctx = c.getContext("2d");
 	var i;
 	var button = document.getElementsByTagName('button');
-	for (i=8; i < (colorAmount + 8); i++) {
+	for (i=6; i < (colorAmount + 6); i++) {
 		button[i].style.display = "inline";
 	}
 	document.body.style.backgroundColor = "navy";
 	document.getElementById('buttonStart').style.display = "none";
 	document.getElementById('buttonOptions').style.display = "none";
+	document.getElementById('explanation').style.display = "none";
+	document.getElementById('title').style.display = "none";
 	document.getElementById('buttonExit').style.display = "inline";
 	document.getElementById('Canvas').style.display = "inline";
 	document.getElementById('buttonPlay').style.display = "inline";
-	document.getElementById('viewCode').style.display = "inline";
-	document.getElementById('testHints').style.display = "inline";
 	document.getElementById('inGameInfo').style.display = "inline";
 	select = 0;
 }
@@ -173,44 +177,22 @@ function viewCode() {
 	}
 }
 
-function testHints() {
-	var c = document.getElementById('Canvas');
-	var ctx = c.getContext("2d");
-	var h;
-	var v;
-	var r;
-	for (r=0; r<2; r++) {
-		for (h=0; h<2; h++) {
-			for (v=0; v<24; v++) {
-				ctx.beginPath();
-				ctx.arc(r*440 + h*20 + 10, v*20 + 110, 10, 0, 2*Math.PI);
-				if (r == 0) {
-					ctx.fillStyle="white";
-				} else {
-					ctx.fillStyle="red";
-				}
-				ctx.fill();
-			}
-		}
-	}
-}
-
 function exitGame() {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	ctx.clearRect(0,0,c.width,c.height);
 	var button = document.getElementsByTagName('button');
-	for (i=8; i < (colorAmount + 8); i++) {
+	for (i=6; i < (colorAmount + 6); i++) {
 		button[i].style.display = "none";
 	}
 	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
+	document.getElementById('explanation').style.display = "inline";
+	document.getElementById('title').style.display = "inline";
 	document.getElementById('buttonExit').style.display = "none";
 	document.getElementById('Canvas').style.display = "none";
 	document.getElementById('buttonPlay').style.display = "none";
-	document.getElementById('viewCode').style.display = "none";
-	document.getElementById('testHints').style.display = "none";
 	document.getElementById('color1').style.display = "none";
 	document.getElementById('inGameInfo').style.display = "none";
 	document.getElementById('inGameInfo').innerHTML = "";
@@ -282,7 +264,124 @@ function playColors() {
 			setTimeout(exitGame,3000);
 		}
 	} else {
+		document.getElementById('inGameInfo').innerHTML = "plz select 4 colors";
 		console.log("plz select 4 colors!");
+	}
+}
+
+function checkHints() {
+	var correctColor = 0;
+	var correctPosition = 0;
+	var i;
+	var l;
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
+
+	for (i=0; i<4; i++) {
+		if (playCode[i] == code[i]) {
+			correctPosition += 1;
+		}
+	}
+
+	if (playCode[0] == code[1] || playCode[0] == code[2] || playCode[0] == code[3]) {
+		correctColor += 1;
+	}
+	if (playCode[1] == code[0] || playCode[1] == code[2] || playCode[1] == code[3]) {
+		correctColor += 1;
+	}
+	if (playCode[2] == code[0] || playCode[2] == code[1] || playCode[2] == code[3]) {
+		correctColor += 1;
+	}
+	if (playCode[3] == code[0] || playCode[3] == code[1] || playCode[3] == code[2]) {
+		correctColor += 1;
+	}
+
+	switch(correctColor) {
+		case 1:
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill();
+			break;
+		case 2:
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.arc(30, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill();
+			break;
+		case 3:
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.arc(30, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill()
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill();
+			break;
+		case 4:
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.arc(30, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill()
+			ctx.beginPath();
+			ctx.arc(10, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+			ctx.arc(30, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+			ctx.fillStyle="white";
+			ctx.fill();
+			break;
+	}
+
+	switch(correctPosition) {
+			case 1:
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill();
+				break;
+			case 2:
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.arc(470, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill();
+				break;
+			case 3:
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.arc(470, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill()
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill();
+				break;
+			case 4:
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.arc(470, (triesLeft*2)*20+110, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill()
+				ctx.beginPath();
+				ctx.arc(450, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+				ctx.arc(470, (triesLeft*2)*20+130, 10, 0, 2*Math.PI);
+				ctx.fillStyle="red";
+				ctx.fill();
+				break;
+		}
+
+	if (correctPosition == 4) {
+		document.getElementById('inGameInfo').innerHTML = "You WIN";
+		viewCode();
+		setTimeout(exitGame,3000);
+	} else {
+		console.log("colors on correct position: " + correctPosition);
+		console.log("correct colors: " + correctColor);
+		playColors();
 	}
 }
 
@@ -292,9 +391,6 @@ http://www.w3schools.com/jsref/event_key_key.asp
 http://www.w3schools.com/TAgs/ref_canvas.asp
 
 code in progress
-new line/-1 triesLeft
-draw arrow on new line
-remove arrow from old line
 hints(left white,right red)
 
 */

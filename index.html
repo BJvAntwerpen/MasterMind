@@ -7,7 +7,9 @@
 </head>
 <body onkeydown="moveLR(event);">
 
+<h1 id="title">Mastermind</h1>
 <p id="inGameInfo"></p>
+<p id="explanation">use arrow keys to select where to input a color</p>
 <button id="buttonStart" type="button" onclick="startGame(); HUD(); genCode();">Start</button>
 <button id="buttonOptions" type="button" onclick="options();">Options</button>
 <button id="dupeColors" type="button" onclick="changeDupes();">false</button>
@@ -16,8 +18,6 @@
 <p id="amountColors">8</p>
 <button id="increaseColors" type="button" onclick="increaseColors();">&#8811;</button>
 <canvas id="Canvas" width="480px" height="580px"></canvas>
-<button id="viewCode" onclick="viewCode();">viewCode</button>
-<button id="testHints" onclick="testHints();">testHint</button>
 <div id="colorContainer">
 	<button id="color1" onclick="addColor('green');"></button>
 	<button id="color2" onclick="addColor('blue');"></button>
@@ -29,7 +29,7 @@
 	<button id="color8" onclick="addColor('magenta');"></button>
 	<button id="color9" onclick="addColor('orange');"></button>
 	<button id="color10" onclick="addColor('pink');"></button>
-	<button id="buttonPlay" type="button" onclick="playColors();">Play</button>
+	<button id="buttonPlay" type="button" onclick="checkHints();">Play</button>
 	<button id="buttonExit" type="button" onclick="exitGame();">Exit</button>
 </div>
 

@@ -27,6 +27,10 @@ canvas {
 	display: inline;
 }
 
+#explanation {
+	display: inline;
+}
+
 #buttonPlay {
 	position: absolute;
 	top: 5px;
