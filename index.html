@@ -16,18 +16,18 @@
 <button id="decreaseColors" type="button" onclick="decreaseColors();">&#8810;</button>
 <p id="amountColors">8</p>
 <button id="increaseColors" type="button" onclick="increaseColors();">&#8811;</button>
-<canvas id="Canvas" width="480px" height="580px"></canvas>
+<canvas id="Canvas" width="480px" height="580px" onmousemove="selectPosition(event);"></canvas>
 <div id="colorContainer">
-	<button id="color1" onclick="addColor('green');"></button>
-	<button id="color2" onclick="addColor('blue');"></button>
-	<button id="color3" onclick="addColor('red');"></button>
-	<button id="color4" onclick="addColor('yellow');"></button>
-	<button id="color5" onclick="addColor('cyan');"></button>
-	<button id="color6" onclick="addColor('lime');"></button>
-	<button id="color7" onclick="addColor('purple');"></button>
-	<button id="color8" onclick="addColor('magenta');"></button>
-	<button id="color9" onclick="addColor('orange');"></button>
-	<button id="color10" onclick="addColor('pink');"></button>
+	<button id="color1" onclick="addColor('green');">0</button>
+	<button id="color2" onclick="addColor('blue');">1</button>
+	<button id="color3" onclick="addColor('red');">2</button>
+	<button id="color4" onclick="addColor('yellow');">3</button>
+	<button id="color5" onclick="addColor('cyan');">4</button>
+	<button id="color6" onclick="addColor('lime');">5</button>
+	<button id="color7" onclick="addColor('purple');">6</button>
+	<button id="color8" onclick="addColor('magenta');">7</button>
+	<button id="color9" onclick="addColor('orange');">8</button>
+	<button id="color10" onclick="addColor('pink');">9</button>
 	<button id="buttonPlay" type="button" onclick="checkHints();">Play</button>
 	<button id="buttonExit" type="button" onclick="exitGame();">Exit</button>
 </div>

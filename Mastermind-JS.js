@@ -13,7 +13,6 @@ var colors = [
 var code = [];
 var playCode = [];
 var colorAmount = 8;
-var dupes = false;
 var select = 0;
 var triesLeft = 11;
 
@@ -28,7 +27,6 @@ function options() {
 	document.getElementById('decreaseColors').style.display = "inline";
 	document.getElementById('increaseColors').style.display = "inline";
 	document.getElementById('amountColors').style.display = "inline";
-	document.getElementById('dupeColors').style.display = "inline";
 	document.getElementById('buttonBack').style.display = "inline";
 }
 
@@ -70,7 +68,6 @@ function Back() {
 	document.getElementById('decreaseColors').style.display = "none";
 	document.getElementById('increaseColors').style.display = "none";
 	document.getElementById('amountColors').style.display = "none";
-	document.getElementById('dupeColors').style.display = "none";
 	document.getElementById('buttonBack').style.display = "none";
 }
 
@@ -178,27 +175,28 @@ function exitGame() {
 	document.getElementById('inGameInfo').innerHTML = "";
 	code = [];
 	playCode = [];
+	triesLeft = 11;
 }
 
 function moveLR(event) {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
-	var arrowKey = event.key;
-	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
+	var inputKey = event.key;
+	if (inputKey == 'ArrowLeft' || inputKey == 'ArrowRight') {
 		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
 	}
-	if (arrowKey == 'ArrowLeft') {
+	if (inputKey == 'ArrowLeft') {
 		console.log('pressed left');
 		if (select > 0) {
 			select -= 1;
 		}
-	} else if (arrowKey == 'ArrowRight') {
+	} else if (inputKey == 'ArrowRight') {
 		console.log('pressed right');
 		if (select < 3) {
 			select += 1;
 		}
 	}
-	if (arrowKey == 'ArrowLeft' || arrowKey == 'ArrowRight') {
+	if (inputKey == 'ArrowLeft' || inputKey == 'ArrowRight') {
 	ctx.beginPath();
 	ctx.moveTo(42+select*100,triesLeft*40+121);
 	ctx.lineTo(68+select*100,triesLeft*40+121);
@@ -208,6 +206,80 @@ function moveLR(event) {
 	ctx.strokeStyle='cyan';
 	ctx.stroke();
 }
+	if (inputKey == 'Enter') {
+		checkHints();
+	} else if (inputKey == '0') {
+		addColor('green');
+	} else if (inputKey == '1') {
+		addColor('blue');
+	} else if (inputKey == '2') {
+		addColor('red');
+	} else if (inputKey == '3') {
+		addColor('yellow');
+	} else if (inputKey == '4') {
+		addColor('cyan');
+	} else if (inputKey == '5') {
+		addColor('lime');
+	} else if (inputKey == '6' && colorAmount > 6) {
+		addColor('purple');
+	} else if (inputKey == '7' && colorAmount > 7) {
+		addColor('magenta');
+	} else if (inputKey == '8' && colorAmount > 8) {
+		addColor('orange');
+	} else if (inputKey == '9' && colorAmount > 9) {
+		addColor('pink');
+	}
+}
+
+function selectPosition(e) {
+	var c = document.getElementById('Canvas');
+	var ctx = c.getContext("2d");
+	posX = e.clientX;
+	if (posX <= 668) {
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
+		select = 0
+		ctx.beginPath();
+		ctx.moveTo(42+select*100,triesLeft*40+121);
+		ctx.lineTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+109);
+		ctx.moveTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+133);
+		ctx.strokeStyle='cyan';
+		ctx.stroke();
+	} else if (posX > 668 && posX <= 768) {
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
+		select = 1
+		ctx.beginPath();
+		ctx.moveTo(42+select*100,triesLeft*40+121);
+		ctx.lineTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+109);
+		ctx.moveTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+133);
+		ctx.strokeStyle='cyan';
+		ctx.stroke();
+	} else if (posX > 768 && posX <= 868) {
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
+		select = 2
+		ctx.beginPath();
+		ctx.moveTo(42+select*100,triesLeft*40+121);
+		ctx.lineTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+109);
+		ctx.moveTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+133);
+		ctx.strokeStyle='cyan';
+		ctx.stroke();
+	} else if (posX > 868) {
+		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
+		select = 3
+		ctx.beginPath();
+		ctx.moveTo(42+select*100,triesLeft*40+121);
+		ctx.lineTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+109);
+		ctx.moveTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+133);
+		ctx.strokeStyle='cyan';
+		ctx.stroke();
+	}
 }
 
 function addColor(color) {
@@ -225,7 +297,7 @@ function playColors() {
 	var c = document.getElementById('Canvas');
 	var ctx = c.getContext("2d");
 	if (playCode.length == 4 && playCode[0] != undefined && playCode[1] != undefined && playCode[2] != undefined && playCode[3] != undefined) {
-		console.log(playCode);
+		console.log("code played is: "+playCode);
 		playCode = [];
 		ctx.clearRect(42+select*100,triesLeft*40+108,27,26);
 		if (triesLeft != 0) {
@@ -241,7 +313,7 @@ function playColors() {
 		} else {
 			document.getElementById('inGameInfo').innerHTML = "game over!";
 			viewCode();
-			setTimeout(exitGame,3000);
+			setTimeout(exitGame,4000);
 		}
 	} else {
 		document.getElementById('inGameInfo').innerHTML = "plz select 4 colors";
@@ -357,10 +429,15 @@ function checkHints() {
 	if (correctPosition == 4) {
 		document.getElementById('inGameInfo').innerHTML = "You WIN";
 		viewCode();
-		setTimeout(exitGame,3000);
+		setTimeout(exitGame,4000);
 	} else {
 		console.log("colors on correct position: " + correctPosition);
 		console.log("correct colors: " + correctColor);
 		playColors();
 	}
 }
+
+/* things to add
+http://www.w3schools.com/jsref/event_onmousemove.asp
+stuffz 'n thingsz
+*/
