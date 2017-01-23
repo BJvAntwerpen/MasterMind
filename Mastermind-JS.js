@@ -62,7 +62,7 @@ function Back() {
 	console.log('back');
 	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
-	document.getElementById('explanation').style.display = "inline";
+	document.getElementById('explanation').style.display = "block";
 	document.getElementById('title').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
 	document.getElementById('decreaseColors').style.display = "none";
@@ -165,7 +165,7 @@ function exitGame() {
 	document.body.style.backgroundColor = "maroon";
 	document.getElementById('buttonStart').style.display = "inline";
 	document.getElementById('buttonOptions').style.display = "inline";
-	document.getElementById('explanation').style.display = "inline";
+	document.getElementById('explanation').style.display = "block";
 	document.getElementById('title').style.display = "inline";
 	document.getElementById('buttonExit').style.display = "none";
 	document.getElementById('Canvas').style.display = "none";

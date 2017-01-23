@@ -6,11 +6,6 @@ button {
 	display: none;
 }
 
-p {
-	display: none;
-	border: 1px solid black;
-}
-
 canvas {
 	border: 1px solid black;
 	display: none;
@@ -19,15 +14,16 @@ canvas {
 	left: 527.1px;
 }
 
+#amountColors {
+	display: none;
+	border: 1px solid black;
+}
+
 #buttonStart {
 	display: inline;
 }
 
 #buttonOptions {
-	display: inline;
-}
-
-#explanation {
 	display: inline;
 }
 
