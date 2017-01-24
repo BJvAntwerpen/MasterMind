@@ -27,6 +27,7 @@ function options() {
 	document.getElementById('decreaseColors').style.display = "inline";
 	document.getElementById('increaseColors').style.display = "inline";
 	document.getElementById('amountColors').style.display = "inline";
+	document.getElementById('infoAmountColors').style.display = "inline";
 	document.getElementById('buttonBack').style.display = "inline";
 }
 
@@ -68,6 +69,7 @@ function Back() {
 	document.getElementById('decreaseColors').style.display = "none";
 	document.getElementById('increaseColors').style.display = "none";
 	document.getElementById('amountColors').style.display = "none";
+	document.getElementById('infoAmountColors').style.display = "none";
 	document.getElementById('buttonBack').style.display = "none";
 }
 
