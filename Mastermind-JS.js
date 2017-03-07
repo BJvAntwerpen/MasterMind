@@ -438,8 +438,3 @@ function checkHints() {
 		playColors();
 	}
 }
-
-/* things to add
-http://www.w3schools.com/jsref/event_onmousemove.asp
-stuffz 'n thingsz
-*/
