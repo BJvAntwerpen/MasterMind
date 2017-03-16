@@ -15,20 +15,40 @@ var playCode = [];
 var colorAmount = 8;
 var select = 0;
 var triesLeft = 11;
+var optionsStyle = {
+	"buttonStart": "none",
+	"buttonOptions": "none",
+	"explanation": "none",
+	"title": "none",
+	"decreaseColors": "inline",
+	"increaseColors": "inline",
+	"amountColors": "inline",
+	"infoAmountColors": "inline",
+	"buttonBack": "inline"
+};
+var menuStyle = {
+	"buttonStart": "inline",
+	"buttonOptions": "inline",
+	"explanation": "block",
+	"title": "inline",
+	"decreaseColors": "none",
+	"increaseColors": "none",
+	"amountColors": "none",
+	"infoAmountColors": "none",
+	"buttonBack": "none"
+};
+
+function setDisplayStyle(styles) {
+	for (var style in styles) {
+		document.getElementById(style).style.display = styles[style];
+	}
+}
 
 // all functions for options
 function options() {
 	console.log('Options');
 	document.body.style.backgroundColor = colors[Math.floor(Math.random() * 10)];
-	document.getElementById('buttonStart').style.display = "none";
-	document.getElementById('buttonOptions').style.display = "none";
-	document.getElementById('explanation').style.display = "none";
-	document.getElementById('title').style.display = "none";
-	document.getElementById('decreaseColors').style.display = "inline";
-	document.getElementById('increaseColors').style.display = "inline";
-	document.getElementById('amountColors').style.display = "inline";
-	document.getElementById('infoAmountColors').style.display = "inline";
-	document.getElementById('buttonBack').style.display = "inline";
+	setDisplayStyle(optionsStyle);
 }
 
 function increaseColors() {
@@ -62,15 +82,7 @@ function decreaseColors() {
 function Back() {
 	console.log('back');
 	document.body.style.backgroundColor = "maroon";
-	document.getElementById('buttonStart').style.display = "inline";
-	document.getElementById('explanation').style.display = "block";
-	document.getElementById('title').style.display = "inline";
-	document.getElementById('buttonOptions').style.display = "inline";
-	document.getElementById('decreaseColors').style.display = "none";
-	document.getElementById('increaseColors').style.display = "none";
-	document.getElementById('amountColors').style.display = "none";
-	document.getElementById('infoAmountColors').style.display = "none";
-	document.getElementById('buttonBack').style.display = "none";
+	setDisplayStyle(menuStyle);
 }
 
 // all functions for the game
@@ -199,15 +211,15 @@ function moveLR(event) {
 		}
 	}
 	if (inputKey == 'ArrowLeft' || inputKey == 'ArrowRight') {
-	ctx.beginPath();
-	ctx.moveTo(42+select*100,triesLeft*40+121);
-	ctx.lineTo(68+select*100,triesLeft*40+121);
-	ctx.lineTo(56+select*100,triesLeft*40+109);
-	ctx.moveTo(68+select*100,triesLeft*40+121);
-	ctx.lineTo(56+select*100,triesLeft*40+133);
-	ctx.strokeStyle='cyan';
-	ctx.stroke();
-}
+		ctx.beginPath();
+		ctx.moveTo(42+select*100,triesLeft*40+121);
+		ctx.lineTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+109);
+		ctx.moveTo(68+select*100,triesLeft*40+121);
+		ctx.lineTo(56+select*100,triesLeft*40+133);
+		ctx.strokeStyle='cyan';
+		ctx.stroke();
+	}
 	if (inputKey == 'Enter') {
 		checkHints();
 	} else if (inputKey == '0') {
